@@ -3,7 +3,17 @@ title: "Factors for popularity of music"
 subtitle: "An analysis of popular music on Spotify."
 author: "Filipe Jung, Adrian Keller"
 date: "2025-11-21"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    toc_float: true
+    code_folding: hide
+    theme: flatly
+    highlight: tango
+    code_download: true
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -12,21 +22,39 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # The Data
 
-The data we are using is from TidyTuesday. The data includes statistics on spotify songs
+The data we are using is from TidyTuesday. The data includes various statistics on 32833 popular Spotify songs (e.g. date, genre, popularity, key, energy, album, etc.). Our goal is to find interesting correlations on how the different statistics relate, especially within and between certain genres. There is no missing data, but certain data quirks have to be considered when looking at statistics. The list of different columns can be seen in the list below
 
-```{r cars}
-summary(cars)
+```{r cars, include=FALSE}
+library(readr)
+library(tidyverse)
+library(ggplot2)
+spotify_songs <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-01-21/spotify_songs.csv')
 ```
 
-## Including Plots
+```{r data headers}
 
-You can also embed plots, for example:
+names(spotify_songs)
 
-```{r pressure, echo=FALSE}
-plot(pressure)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Data on popularity
+
+Looking at the distribution of popularity of these songs, it is easy to see that songs with lower popularity seem to fill a large part of the data.
+
+```{r pop plot, echo=FALSE}
+ggplot(data = spotify_songs, aes(x=track_popularity))+
+  geom_bar()
+```
+
+For better analysis in relation with the popularity of the songs, we thought it would make sense to exclude songs with low popularity.
+
+```{r pop plot filter, echo=FALSE}
+spotify_songs_filter = spotify_songs %>%
+  dplyr::filter(track_popularity>5)
+ggplot(data = spotify_songs_filter, aes(x=track_popularity))+
+  geom_bar()
+```
+
 
 # References
 
