@@ -56,6 +56,26 @@ ggplot(data = spotify_songs_filter, aes(x=track_popularity))+
 ```
 
 
+```{r show ridgeplot, echo=FALSE}
+library(tidyverse)
+
+spotify_songs_stats = pivot_longer(
+  spotify_songs %>% select(track_popularity, danceability, energy, speechiness, acousticness, instrumentalness, liveness, valence),
+  cols = danceability:valence, names_to = "value_name", values_to = "value"
+)
+
+library(ggridges)
+
+ggplot(spotify_songs_stats, aes(track_popularity, y=fct_reorder(value_name, value), group=value_name, height=value)) +
+  geom_ridgeline(
+    alpha = 0.4,
+    fill = "#05595b",
+    color = "white"
+  )+
+  labs(title = "", x = "Popularity", y = "")
+  
+```
+
 # References
 
 ```{r references, echo=FALSE}
