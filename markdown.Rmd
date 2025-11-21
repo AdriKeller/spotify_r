@@ -1,6 +1,7 @@
 ---
-title: "Spotify_Songs_Prelim"
-author: "Filipe Jung"
+title: "Factors for popularity of music"
+subtitle: "An analysis of popular music on Spotify."
+author: "Filipe Jung, Adrian Keller"
 date: "2025-11-21"
 output: html_document
 ---
@@ -26,3 +27,11 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# References
+
+```{r references, echo=FALSE}
+library(report)
+
+report(sessionInfo())
+```
