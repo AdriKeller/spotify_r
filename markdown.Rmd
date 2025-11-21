@@ -54,3 +54,26 @@ ggplot(data = spotify_songs_filter, aes(x=track_popularity))+
   geom_bar()
 ```
 
+## Summary of genres
+
+Comparing the statistics for different genres
+
+```{r genre, echo=FALSE}
+genre_filter_edm <- spotify_songs_filter %>% 
+  dplyr::filter(playlist_genre="edm")
+genre_filter_latin <- spotify_songs_filter %>% 
+  dplyr::filter(playlist_genre="latin")
+genre_filter_pop <- spotify_songs_filter %>% 
+  dplyr::filter(playlist_genre="pop")
+genre_filter_latin <- spotify_songs_filter %>% 
+  dplyr::filter(playlist_genre="r&b")
+genre_filter_edm <- spotify_songs_filter %>% 
+  dplyr::filter(playlist_genre="rap")
+genre_filter_latin <- spotify_songs_filter %>% 
+  dplyr::filter(playlist_genre="rock")
+
+genre_filter_mean <- mean(c(genre_filter_edm, genre_filter_latin))
+  
+ggplot(data.frame(mean = mean(spotify_songs_filter$track_popularity), question = spotify_songs_filter$playlist_genre)) +
+      geom_col(aes(question, mean))
+```
