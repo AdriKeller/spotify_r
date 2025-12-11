@@ -1,0 +1,7 @@
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(broom)
+spotify_songs <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-01-21/spotify_songs.csv')
